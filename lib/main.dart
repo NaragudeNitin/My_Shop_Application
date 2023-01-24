@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_shop_app/screens/product_detail_screen.dart';
 import 'package:my_shop_app/screens/products_overview_screen.dart';
 
 void main() {
@@ -20,6 +21,15 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Lato',
       ),
       home: ProductsOverViewScreen(),
+      routes:  {
+        ProductDetailScreen.routeName:(context) => ProductDetailScreen(),
+
+      },
     );
   }
 }
+
+
+/**
+ * to avoid constructor call we can use CENTRAL STATE MANAGEMENT SOLUTION 
+ */
