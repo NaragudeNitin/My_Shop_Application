@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_shop_app/providers/products.dart';
+
 import 'package:provider/provider.dart';
+import '../providers/products.dart';
 import 'products_items.dart';
 
 class ProductsGrid extends StatelessWidget {
@@ -21,10 +22,17 @@ class ProductsGrid extends StatelessWidget {
         crossAxisSpacing: 10, 
         mainAxisSpacing: 10
         ), 
-      itemBuilder: (context, index) => ProductItem(
-        id: products[index].id,
-        title: products[index].title,
-        imageUrl: products[index].imageUrl,
-      ),);
+      itemBuilder: (context, index) => ChangeNotifierProvider(create: (context) => products[index],
+        child: ProductItem(
+        // id: products[index].id,
+        // title: products[index].title,
+        // imageUrl: products[index].imageUrl,
+      ),
+      ),
+      );
   }
 }
+
+/**
+ * if we give give provider to item builder it will notify the change in the single item
+ */

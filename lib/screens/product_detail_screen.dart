@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_shop_app/providers/products.dart';
 import 'package:provider/provider.dart';
+import '../providers/products.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   // const ProductDetailScreen({super.key, required this.title});
@@ -19,6 +19,7 @@ class ProductDetailScreen extends StatelessWidget {
       ),
     );
   }
+  
   /**
    * -when you dont want to change your data whenever 
    *   item is added then we can use listen argument as 'false' in of() after provider
