@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
 
-        title: Text("My Shop"),
+        title: const Text("My Shop"),
       ),
       body: const Center(
           child: Text("My Shop Application"),
