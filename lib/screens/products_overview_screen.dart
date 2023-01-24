@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_shop_app/widgets/products_items.dart';
 import '../models/products.dart';
 
 class ProductsOverViewScreen extends StatelessWidget {
@@ -54,8 +55,10 @@ class ProductsOverViewScreen extends StatelessWidget {
           crossAxisSpacing: 10, 
           mainAxisSpacing: 10
           ), 
-        itemBuilder: (context, index) => Container(
-
+        itemBuilder: (context, index) => ProductItem(
+          id: loadedProducts[index].id,
+          title: loadedProducts[index].title,
+          imageUrl: loadedProducts[index].imageUrl,
         ),),
     );
   }
