@@ -52,3 +52,5 @@ class ProductItem extends StatelessWidget {
     );
   }
 }
+
+// changed from stateless to statefull widget
