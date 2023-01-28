@@ -38,7 +38,7 @@ class Products with ChangeNotifier{
     ),
       ];
 
-  var _showFavoritesOnly = false;
+  final _showFavoritesOnly = false;
 
   List<Product> get items {
     // if (_showFavoritesOnly) {
