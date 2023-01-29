@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/cart.dart' show Cart;
+import 'package:my_shop_app/providers/orders.dart';
 import 'package:provider/provider.dart';
 import 'package:my_shop_app/widgets/cart_item.dart' /* as ci */;
 
@@ -43,7 +44,11 @@ class CartScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<Orders>(context, listen: false).addOrder(
+                          cart.items.values.toList(), cart.totalAmount);
+                          cart.clear();
+                    },
                     child: Text(
                       "BUY NOW",
                       style: TextStyle(color: Theme.of(context).primaryColor),
@@ -53,18 +58,20 @@ class CartScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Expanded(
-            child:ListView.builder(
+            child: ListView.builder(
               itemCount: cart.items.length,
-              itemBuilder: (context, index) => /* ci. */CartItem(
-                id: cart.items.values.toList()[index].id, 
-                productId: cart.items.keys.toList()[index],
-                title: cart.items.values.toList()[index].title, 
-                quantity: cart.items.values.toList()[index].quantity, 
-                price: cart.items.values.toList()[index].price),
-              ), 
+              itemBuilder: (context, index) => /* ci. */ CartItem(
+                  id: cart.items.values.toList()[index].id,
+                  productId: cart.items.keys.toList()[index],
+                  title: cart.items.values.toList()[index].title,
+                  quantity: cart.items.values.toList()[index].quantity,
+                  price: cart.items.values.toList()[index].price),
             ),
+          ),
         ],
       ),
     );
