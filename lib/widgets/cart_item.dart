@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/cart.dart';
 import 'package:provider/provider.dart';
 
-
 class CartItem extends StatelessWidget {
-  const CartItem({super.key, required this.id, required this.productId ,required this.price, required this.quantity, required this.title});
+  const CartItem(
+      {super.key,
+      required this.id,
+      required this.productId,
+      required this.price,
+      required this.quantity,
+      required this.title});
   final String id;
   final String productId;
   final double price;
@@ -21,20 +26,20 @@ class CartItem extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20),
         margin: const EdgeInsets.symmetric(
           horizontal: 15,
-          vertical: 4,),
-        child: const Icon(Icons.delete,
-        color: Colors.white,
-        size: 40,),
+          vertical: 4,
         ),
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          Provider.of<Cart>(context, listen: false).removeItem(productId);
-        },
+        child: const Icon(
+          Icons.delete,
+          color: Colors.white,
+          size: 40,
+        ),
+      ),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        Provider.of<Cart>(context, listen: false).removeItem(productId);
+      },
       child: Card(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 4
-        ),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
@@ -47,7 +52,8 @@ class CartItem extends StatelessWidget {
             title: Text(title),
             subtitle: Text("Total: \$${price * quantity}"),
             trailing: Text("$quantity x"),
-          ),),
+          ),
+        ),
       ),
     );
   }

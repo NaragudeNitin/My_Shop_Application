@@ -23,23 +23,31 @@ class ProductDetailScreen extends StatelessWidget {
             SizedBox(
               height: 300,
               width: double.infinity,
-              child: Image.network(loadedProduct.imageUrl,
-              fit: BoxFit.cover,),
+              child: Image.network(
+                loadedProduct.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
-            const SizedBox(height: 10,),
-            Text("\$${loadedProduct.price}",
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 20,
+            const SizedBox(
+              height: 10,
             ),
+            Text(
+              "\$${loadedProduct.price}",
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+              ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
-              child: Text(loadedProduct.description,
-              textAlign: TextAlign.center,
-              softWrap: true,
+              child: Text(
+                loadedProduct.description,
+                textAlign: TextAlign.center,
+                softWrap: true,
               ),
             )
           ],
@@ -47,7 +55,7 @@ class ProductDetailScreen extends StatelessWidget {
       ),
     );
   }
-  
+
   /**
    * -when you dont want to change your data whenever 
    *   item is added then we can use listen argument as 'false' in of() after provider

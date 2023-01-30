@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/cart.dart';
 import 'package:my_shop_app/screens/cart_screen.dart';
+import 'package:my_shop_app/widgets/app_drawer.dart';
 import 'package:my_shop_app/widgets/badge.dart';
 import 'package:provider/provider.dart';
 import '../widgets/products_grid.dart';
@@ -27,40 +28,40 @@ class _ProductsOverViewScreenState extends State<ProductsOverViewScreen> {
         title: const Text("My Shop"),
         actions: [
           PopupMenuButton(
-            onSelected: (FilterOptions selectedValue) {
-              setState(() {
-                if (selectedValue == FilterOptions.favorites) {
-                  _showOnlyFavorites = true;
-                } else {
-                  _showOnlyFavorites = false;
-                }
-              });
-            },
-            itemBuilder: (_) => [
-               const PopupMenuItem(
-                value: FilterOptions.favorites,
-                child: Text("only favorites"),
-              ),
-               const PopupMenuItem(
-                value: FilterOptions.all,
-                child: Text("Show All"),
-              ),
-            ]
-          ),
+              onSelected: (FilterOptions selectedValue) {
+                setState(() {
+                  if (selectedValue == FilterOptions.favorites) {
+                    _showOnlyFavorites = true;
+                  } else {
+                    _showOnlyFavorites = false;
+                  }
+                });
+              },
+              itemBuilder: (_) => [
+                    const PopupMenuItem(
+                      value: FilterOptions.favorites,
+                      child: Text("only favorites"),
+                    ),
+                    const PopupMenuItem(
+                      value: FilterOptions.all,
+                      child: Text("Show All"),
+                    ),
+                  ]),
           Consumer<Cart>(
-                builder: (context, cart, ch) => Badge(
-                  value: cart.itemCount.toString(), 
-                  child: ch!,
-                ),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed( CartScreen.routeName);
-                    },
-                    icon: const Icon(Icons.shopping_cart),
-                  ),
-              ),
+            builder: (context, cart, ch) => Badge(
+              value: cart.itemCount.toString(),
+              child: ch!,
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+              icon: const Icon(Icons.shopping_cart),
+            ),
+          ),
         ],
       ),
+      drawer: const AppDrawer(),
       body: ProductsGrid(
         showFavs: _showOnlyFavorites,
       ),
