@@ -18,16 +18,19 @@ class UserPRoductItem extends StatelessWidget {
           padding: const EdgeInsets.all(1.0),
           child: Row(
             children: [
+
               IconButton(onPressed: () {
                 
               }, icon: const Icon(Icons.edit),
               color: Theme.of(context).primaryColor,
               ),
+
               IconButton(onPressed: () {
                 
               }, icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
               ),
+              
             ],
           ),
         ),

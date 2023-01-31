@@ -7,11 +7,12 @@ import 'package:provider/provider.dart';
 
 class UserProductScreen extends StatelessWidget {
   const UserProductScreen({super.key});
-  static const routeName = 'user-products';
+  static const routeName = '/user-products';
 
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Products"),
