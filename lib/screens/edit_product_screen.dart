@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/product.dart';
 import 'package:my_shop_app/providers/products.dart';
@@ -90,19 +92,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
 
-    if (_editedProduct.id == null) {
-      print("edit edit edit edt edit edit edit edit eidy ");
-      Provider.of<Products>(context, listen: false)
+    if (_editedProduct.id != null) {
+      stdout.writeln("edit edit edit edt edit edit edit edit eidy ");
+      await Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);
-      setState(() {
-        _isLoading = false;
-      });
-      Navigator.of(context).pop();
     }
     // Navigator.of(context).pop();
 
     else {
-      print("save save save vsave savesavesave Vsave savesave ");
+      stdout.writeln("save save save vsave savesavesave Vsave savesave ");
 
       try {
         await Provider.of<Products>(context, listen: false)
@@ -122,13 +120,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
             ],
           ),
         );
-      } finally {
+      } 
+      /* finally {
         setState(() {
           _isLoading = true;
         });
         Navigator.of(context).pop();
-      }
+      } */
     }
+    setState(() {
+        _isLoading = false;
+      });
+      Navigator.of(context).pop();
   }
 
   @override
