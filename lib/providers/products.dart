@@ -56,37 +56,38 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  // void showFavoritesOnly(){
-  //   _showFavoritesOnly = true;
-  //   notifyListeners();
-  // }
-
-  // void showAll(){
-  //   _showFavoritesOnly = false;
-  //   notifyListeners();
-  // }
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) async {
     const url = 'https://myshopapp-becc5-default-rtdb.firebaseio.com/products.json';
-    http.post((Uri.parse(url)), body: jsonEncode({
-      'title' : product.title,
-      'description' :product.description,
-      'imageUrl' : product.imageUrl,
-      'price' : product.price,
-      'isFavorite' : product.isFavorite
-    }),).then((response) {
+    try {
+      final response = await http.post(
+        (Uri.parse(url)),
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'imageUrl': product.imageUrl,
+          'price': product.price,
+
+        }),
+      );
+      print(response);
+
       print(json.decode(response.body));
       final newProduct = Product(
-    id: json.decode(response.body)['name'], 
-    title: product.title, 
-    description: product.description, 
-    price: product.price,
-     imageUrl: product.imageUrl
-     );
-     _items.add(newProduct);
-    //  _items.insert(0, newProduct); //at the start of the list
-    notifyListeners();
-    });
-   
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        id: json.decode(response.body)['name'],
+      );
+      _items.add(newProduct);
+      notifyListeners();
+
+      // _items.insert(0, newProduct); // at the start of the list
+
+    } catch (error) {
+      print(error);
+      throw error;
+    }
   }
 
   void updateProduct(String id, Product newProduct){
