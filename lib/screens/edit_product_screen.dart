@@ -102,12 +102,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
     // Navigator.of(context).pop();
 
     else {
-
       // print("save save save vsave savesavesave Vsave savesave ");
 
       try {
         await Provider.of<Products>(context, listen: false)
-          .addProduct(_editedProduct);
+            .addProduct(_editedProduct);
       } catch (error) {
         await showDialog(
           context: context,
@@ -121,17 +120,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   },
                   child: const Text("Okay"))
             ],
-          ),);
-      } finally{
+          ),
+        );
+      } finally {
         setState(() {
           _isLoading = true;
         });
         Navigator.of(context).pop();
       }
-
-      
-        
-        
     }
   }
 
