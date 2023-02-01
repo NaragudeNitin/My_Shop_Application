@@ -53,7 +53,6 @@ class UserPRoductItem extends StatelessWidget {
               }, icon: const Icon(Icons.delete),
               color: Theme.of(context).errorColor,
               ),
-              
             ],
           ),
         ),
