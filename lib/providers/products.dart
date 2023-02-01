@@ -74,6 +74,7 @@ class Products with ChangeNotifier {
       'price' : product.price,
       'isFavorite' : product.isFavorite
     }),).then((response) {
+      print(json.decode(response.body));
       final newProduct = Product(
     id: json.decode(response.body)['name'], 
     title: product.title, 

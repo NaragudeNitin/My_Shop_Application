@@ -16,10 +16,15 @@ class UserProductScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Products"),
-        actions: [IconButton(onPressed: () {
-          Navigator.of(context).pushNamed(EditProductScreen.routeName);
-        }, 
-        icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  EditProductScreen.routeName,
+                );
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       drawer: const AppDrawer(),
       body: Padding(
@@ -29,9 +34,10 @@ class UserProductScreen extends StatelessWidget {
           itemBuilder: (_, index) => Column(
             children: [
               UserPRoductItem(
+                  productsData.items[index].id,
                   productsData.items[index].title,
                   productsData.items[index].imageUrl),
-                  const Divider(  )
+              const Divider()
             ],
           ),
         ),
