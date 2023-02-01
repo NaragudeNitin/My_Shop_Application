@@ -90,7 +90,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
 
-    if (_editedProduct.id != null) {
+    if (_editedProduct.id != '') {
       // print("edit edit edit edt edit edit edit edit eidy ");
       Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);

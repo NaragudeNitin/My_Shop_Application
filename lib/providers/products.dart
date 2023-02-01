@@ -1,12 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/product.dart';
 import 'package:http/http.dart' as http; 
 
 class Products with ChangeNotifier {
-  final List<Product> _items = [
-    Product(
+ List<Product> _items = [
+/*     Product(
       id: 'p1',
       title: 'Red Shirt',
       description: 'A red shirt - it is pretty red!',
@@ -37,7 +38,7 @@ class Products with ChangeNotifier {
       price: 49.99,
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
-    ),
+    ), */
   ];
 
 
@@ -56,6 +57,32 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
+  Future<void> fetchAndSetProducts() async{
+    const url = 'https://myshopapp-becc5-default-rtdb.firebaseio.com/products.json';
+    try {
+          final response = await http.get(Uri.parse(url));
+          // print(json.decode(response.body));
+          final extractedData = json.decode(response.body) as Map<String, dynamic>;
+          final List<Product> loadedProducts = [];
+          extractedData.forEach((prodIdKey, prodDataValue) {
+            loadedProducts.add(
+              Product(
+                id: prodIdKey, 
+                title: prodDataValue['title'], 
+                description: prodDataValue['description'], 
+                price: prodDataValue['price'],
+                imageUrl: prodDataValue['imageUrl'],
+                isFavorite: prodDataValue['isFavorite'],
+                )
+            );
+          });
+          _items = loadedProducts;
+          notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<void> addProduct(Product product) async {
     const url = 'https://myshopapp-becc5-default-rtdb.firebaseio.com/products.json';
     try {
@@ -69,9 +96,9 @@ class Products with ChangeNotifier {
 
         }),
       );
-      print(response);
+      stdout.writeln(response);
 
-      print(json.decode(response.body));
+      stdout.writeln(json.decode(response.body));
       final newProduct = Product(
         title: product.title,
         description: product.description,
@@ -85,8 +112,8 @@ class Products with ChangeNotifier {
       // _items.insert(0, newProduct); // at the start of the list
 
     } catch (error) {
-      print(error);
-      throw error;
+      stdout.writeln(error);
+      rethrow;
     }
   }
 
@@ -96,7 +123,7 @@ class Products with ChangeNotifier {
     _items[prodIndex] = newProduct;
     notifyListeners();
     }else{
-      print("....");
+      stdout.writeln("....");
     }
   }
 
