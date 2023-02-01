@@ -68,18 +68,18 @@ class Products with ChangeNotifier {
             loadedProducts.add(
               Product(
                 id: prodIdKey, 
-                title: prodDataValue['title'], 
+                title: prodDataValue['title'] , 
                 description: prodDataValue['description'], 
                 price: prodDataValue['price'],
                 imageUrl: prodDataValue['imageUrl'],
-                isFavorite: prodDataValue['isFavorite'],
+                isFavorite: prodDataValue['isFavorite']?? true,
                 )
             );
           });
           _items = loadedProducts;
           notifyListeners();
     } catch (error) {
-      rethrow;
+      throw (error);
     }
   }
 
@@ -113,7 +113,7 @@ class Products with ChangeNotifier {
 
     } catch (error) {
       stdout.writeln(error);
-      rethrow;
+      throw (error);
     }
   }
 

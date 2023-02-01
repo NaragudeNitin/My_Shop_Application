@@ -90,8 +90,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = true;
     });
 
-    if (_editedProduct.id != '') {
-      // print("edit edit edit edt edit edit edit edit eidy ");
+    if (_editedProduct.id == null) {
+      print("edit edit edit edt edit edit edit edit eidy ");
       Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);
       setState(() {
@@ -102,7 +102,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     // Navigator.of(context).pop();
 
     else {
-      // print("save save save vsave savesavesave Vsave savesave ");
+      print("save save save vsave savesavesave Vsave savesave ");
 
       try {
         await Provider.of<Products>(context, listen: false)
