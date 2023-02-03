@@ -92,9 +92,10 @@ class _ProductsOverViewScreenState extends State<ProductsOverViewScreen> {
         ],
       ),
       drawer: const AppDrawer(),
-      body: _isLoading ? const Center(
-        child: CircularProgressIndicator(),
-      ) : ProductsGrid(
+      body:  _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            ) : ProductsGrid(
         showFavs: _showOnlyFavorites,
       ),
     );

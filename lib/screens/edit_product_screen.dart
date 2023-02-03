@@ -89,7 +89,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
     _form.currentState?.save();
     setState(() {
-      _isLoading = true;
+      _isLoading = true; 
     });
 
     if (_editedProduct.id != null) {
