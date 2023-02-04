@@ -39,7 +39,7 @@ class _OrderScreenState extends State<OrderScreen> {
       ),
       drawer: const AppDrawer(),
       body: _isLoading
-          ?  Center(
+          ?  const Center(
               child: CircularProgressIndicator(),
             ) : ListView.builder(
         itemCount: orderData.orders.length,

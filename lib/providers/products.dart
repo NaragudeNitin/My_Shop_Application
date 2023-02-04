@@ -61,31 +61,26 @@ class Products with ChangeNotifier {
   Future<void> fetchAndSetProducts() async{
     const url = 'https://myshopapp-becc5-default-rtdb.firebaseio.com/products.json';
     try {
-          final response = await http.get(Uri.parse(url));
-          // print(json.decode(response.body));
-          final extractedData = json.decode(response.body) as Map<String, dynamic>;
-          // print(extractedData);
-          if (extractedData == null) {
-            return;
-          }
-          final List<Product> loadedProducts = [];
-          extractedData.forEach((prodIdKey, prodDataValue) {
-            loadedProducts.add(
-              Product(
-                id: prodIdKey , 
-                title: prodDataValue['title'].toString(), 
-                description: prodDataValue['description'].toString(), 
-                price: double.parse(prodDataValue['price'].toString()),
-                // price:  0.0,
-                imageUrl: prodDataValue['imageUrl'].toString() ,
-                isFavorite: prodDataValue['isFavorite']?? true, 
-                )
-            );
-          });
-          _items = loadedProducts;
-          notifyListeners();
+      final response = await http.get(Uri.parse(url));
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if(extractedData == null){
+        return;
+      }
+      final List<Product> loadedProducts = [];
+      extractedData.forEach((prodIdKey, prodDataValue) {
+        loadedProducts.add(Product(
+            id: prodIdKey,
+            title: prodDataValue['title'],
+            description: prodDataValue['description'],
+            price: prodDataValue['price'],
+            imageUrl: prodDataValue['imageUrl'],
+            isFavorite: prodDataValue['isFavorite']));
+      });
+      _items = loadedProducts;
+      notifyListeners();
+      print(json.decode(response.body));
     } catch (error) {
-      throw (error);
+      print(error);
     }
   }
 

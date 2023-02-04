@@ -96,7 +96,7 @@ class _OrderButtonState extends State<OrderButton> {
             });
         widget.cart.clear();
       },
-      child: _isLoading ? CircularProgressIndicator() : Text(
+      child: _isLoading ? const CircularProgressIndicator() : Text(
         "BUY NOW",
         style: TextStyle(color: Theme.of(context).primaryColor),
       ),

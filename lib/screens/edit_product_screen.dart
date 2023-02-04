@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/product.dart';
@@ -93,14 +93,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
     });
 
     if (_editedProduct.id != null) {
-      stdout.writeln("edit edit edit edt edit edit edit edit eidy ");
+      print("edit edit edit edt edit edit edit edit eidy ");
       await Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);
     }
     // Navigator.of(context).pop();
 
     else {
-      stdout.writeln("save save save vsave savesavesave Vsave savesave ");
+      print("save save save vsave savesavesave Vsave savesave ");
 
       try {
         await Provider.of<Products>(context, listen: false)
