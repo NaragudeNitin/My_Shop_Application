@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../modals/http_exception.dart';
 import '../providers/_auth.dart';
-import 'dart:developer';
 
 enum AuthMode { signUp, login }
 
@@ -66,7 +65,7 @@ class AuthScreen extends StatelessWidget {
                         'MyShop',
                         style: TextStyle(
                             color: Theme.of(context)
-                                .accentTextTheme
+                                .primaryTextTheme
                                 .titleMedium!
                                 .color,
                             fontSize: 50,
@@ -108,12 +107,12 @@ class _AuthCardState extends State<AuthCard> {
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
-        title: Text('An Error Occured'),
+        title: const Text('An Error Occured'),
         content: Text(message),
         actions: [
           TextButton(onPressed: () {
             Navigator.of(context).pop();
-          }, child: Text("Okey!"),),
+          }, child: const Text("Okey!"),),
         ],
       ),
       );
@@ -123,34 +122,26 @@ class _AuthCardState extends State<AuthCard> {
   final _passwordController = TextEditingController();
 
  Future<void> _submit() async  {
-    print('submit submit submit submit subbmit submit submit submit');
+    // print('submit submit submit submit subbmit submit submit submit');
     if (!_formKey.currentState!.validate()) {
-      print('##########################');
+      // print('##########################');
       return;
     }
-    print('***************************');
+    // print('***************************');
     _formKey.currentState!.save();
     setState(() {
       _isLoading = true;
     });
-    print('!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    // print('---------------------------');
     try{
       if (_authMode == AuthMode.login)  {
         // log user in
-        await Provider.of<Auth>(context,listen: false).signUp(
-          _authData['email']!, 
-          _authData['password']!
-        );
+        await Provider.of<Auth>(context,listen: false).signIn(_authData['email']!, _authData['password']!);
       } else {
         // sign up user
         await Provider.of<Auth>(context, listen: false)
-            .signUp(
-              _authData['email']!, 
-              _authData['password']!
-            );
+            .signUp(_authData['email']!, _authData['password']!);
       }
-      Navigator.of(context).pushReplacementNamed('/products-overvew');
-      print("............1.1.1..........1....1.1111");
     } on HttpException catch(error){
       var errorMessage = 'Authentication failed';
       if(error.toString().contains('EMAIL_EXISTS')){
@@ -165,14 +156,18 @@ class _AuthCardState extends State<AuthCard> {
       }else if(error.toString().contains('INVALID_PASSWORD')){
         errorMessage = 'Invalid password';
       }
-      print("--------------------------------");
+      // print('%%%%%%%%%%%%%%%%%%%%%%%%%%');
       _showErrorDialog(errorMessage);
     } catch(error){
       const errorMessage = 'Could not authenticate you. please try again later';
-      print("====////============////====");
-      _showErrorDialog(errorMessage); 
-      }
- }
+      // print('^^^^^^^^^^^^^^^^^^^^^^');
+      _showErrorDialog(errorMessage);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   void _switchAuthMode() {
     if (_authMode == AuthMode.login) {

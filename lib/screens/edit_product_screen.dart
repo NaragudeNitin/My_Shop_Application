@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:my_shop_app/providers/product.dart';
 import 'package:my_shop_app/providers/products.dart';
@@ -83,24 +82,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Future<void> _saveForm() async {
-    final isValid = _form.currentState?.validate();
-    if (!isValid!) {
+    final isValid = _form.currentState!.validate();
+    if (!isValid) {
       return;
     }
-    _form.currentState?.save();
+    _form.currentState!.save();
     setState(() {
-      _isLoading = true; 
+      _isLoading = true;
     });
 
-    if (_editedProduct.id != null) {
-      print("edit edit edit edt edit edit edit edit eidy ");
+    if (_editedProduct.id != " ") {
+      // log("edit edit edit edt edit edit edit edit eidy ");
       await Provider.of<Products>(context, listen: false)
           .updateProduct(_editedProduct.id, _editedProduct);
     }
     // Navigator.of(context).pop();
 
     else {
-      print("save save save vsave savesavesave Vsave savesave ");
+      // log("save save save vsave savesavesave Vsave savesave ");
 
       try {
         await Provider.of<Products>(context, listen: false)
@@ -120,7 +119,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             ],
           ),
         );
-      } 
+      }
       /* finally {
         setState(() {
           _isLoading = true;
@@ -129,9 +128,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
       } */
     }
     setState(() {
-        _isLoading = false;
-      });
-      Navigator.of(context).pop();
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
   }
 
   @override
@@ -139,7 +138,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit Product"),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.save))],
+        actions: [
+          IconButton(onPressed: _saveForm, icon: const Icon(Icons.save))
+        ],
       ),
       body: _isLoading
           ? const Center(
