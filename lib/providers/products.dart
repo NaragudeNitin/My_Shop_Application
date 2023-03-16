@@ -41,7 +41,7 @@ class Products with ChangeNotifier {
       url =
           'https://myshopapp-becc5-default-rtdb.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
       final favoriteResponse = await http.get(Uri.parse(url));
-      final favoriteData = json.decode(favoriteResponse.body);
+       json.decode(favoriteResponse.body);
 
       final List<Product> loadedProducts = [];
       extractedData.forEach((prodIdKey, prodDataValue) {
@@ -55,9 +55,9 @@ class Products with ChangeNotifier {
       });
       _items = loadedProducts;
       notifyListeners();
-      print(json.decode(response.body));
+      log(json.decode(response.body));
     } catch (error) {
-      print(error);
+      log('$error');
     }
   }
 

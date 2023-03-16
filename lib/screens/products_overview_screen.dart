@@ -25,10 +25,10 @@ class _ProductsOverViewScreenState extends State<ProductsOverViewScreen> {
 
   @override
   void initState() {
-    // Provider.of<Products>(context).fetchAndSetProducts();//listen isn't false here
-    // Future.delayed(Duration.zero).then((_) {
-    //   Provider.of<Products>(context).fetchAndSetProducts();
-    // });
+    Provider.of<Products>(context).fetchAndSetProducts();//listen isn't false here
+    Future.delayed(Duration.zero).then((_) {
+      Provider.of<Products>(context).fetchAndSetProducts();
+    });
     super.initState();
   }
   /// OR 
