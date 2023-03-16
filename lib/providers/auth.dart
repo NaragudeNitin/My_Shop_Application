@@ -16,6 +16,10 @@ class Auth with ChangeNotifier {
     return token != null;
   }
 
+  String get userId {
+    return _userId ?? '';
+  }
+
   String? get token {
     if (_expiryDate != null &&
         _expiryDate!.isAfter(DateTime.now()) &&
@@ -28,7 +32,7 @@ class Auth with ChangeNotifier {
 
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
-    print('1111111111111111111111111111111111');
+    // print('1111111111111111111111111111111111');
 
     final url =
         'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAkCjlEx_MOZexiDy-IKYLW7VNz6db1SDY';

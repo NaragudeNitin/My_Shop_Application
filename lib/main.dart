@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_shop_app/providers/_auth.dart';
+import 'package:my_shop_app/providers/auth.dart';
 import 'package:my_shop_app/providers/cart.dart';
 import 'package:my_shop_app/screens/auth_screen.dart';
 import 'package:my_shop_app/screens/cart_screen.dart';
@@ -9,6 +9,8 @@ import 'package:my_shop_app/screens/product_detail_screen.dart';
 import 'package:my_shop_app/screens/products_overview_screen.dart';
 import 'package:my_shop_app/screens/user_products_screen.dart';
 import 'package:provider/provider.dart';
+import 'providers/orders.dart';
+import 'providers/products.dart';
 import 'screens/splash_screen.dart';
 
 void main() {
@@ -25,6 +27,19 @@ class MyApp extends StatelessWidget {
       providers: [
       ChangeNotifierProvider.value(
       value:Auth() ),
+      
+      ChangeNotifierProxyProvider<Auth, Products>(
+        create: (_)=> Products(
+          '',
+           '',
+            []
+            ),
+        update:(context, auth, previousProducts) =>Products(
+          auth.token,
+           auth.userId,
+            previousProducts == null ? [] : previousProducts.items
+            ),
+        ),
       // ChangeNotifierProvider.value(
       // value: Products()),
 
@@ -33,12 +48,12 @@ class MyApp extends StatelessWidget {
       // ChangeNotifierProvider.value(
       //   value: Orders(),),
       // ],
-      // ChangeNotifierProxyProvider<Auth, Orders>(
-      //         create: (_) => Orders('', '', []),
-      //         update: (context, auth, previousOrder) => Orders(
-      //             auth.token,
-      //             auth.userId,
-      //             previousOrder == null ? [] : previousOrder.orders))
+      ChangeNotifierProxyProvider<Auth, Orders>(
+              create: (_) => Orders('', '', []),
+              update: (context, auth, previousOrder) => Orders(
+                  auth.token,
+                  auth.userId,
+                  previousOrder == null ? [] : previousOrder.orders))
         ],
     
       child: Consumer<Auth>(

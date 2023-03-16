@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../modals/http_exception.dart';
-import '../providers/_auth.dart';
+import '../providers/auth.dart';
 
 enum AuthMode { signUp, login }
 
